@@ -1,5 +1,7 @@
 package com.example.application
 
+import android.app.Application
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,8 +16,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import com.example.application.Api.ApiCli
+import com.example.application.types.Eleve
 import com.example.application.ui.theme.ApplicationTheme
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +68,7 @@ fun Menu(){
 //greeting avec placeholder
 @Composable
 fun MainCompose(modifier: Modifier) {
+    var api:ApiCli= ApiCli(context = MyApplication.appContext)
     var etat = remember {
         mutableStateOf(0)
     }
@@ -82,7 +87,10 @@ fun MainCompose(modifier: Modifier) {
 //menu dessus appli
         Row(modifier) {
             when (etat.value) {
-                1 -> Text(text = "Liste des élèves :", modifier.fillMaxSize(), textAlign = TextAlign.Center)
+                1 -> {Text(text = "Liste des élèves :", modifier.fillMaxSize(), textAlign = TextAlign.Center)
+                for(eleve:Eleve in api.AfficheEleves()){
+                    Text(text = "eleve")
+                }}
                 2 -> Text(text = "Liste des formations :", modifier.fillMaxSize(), textAlign = TextAlign.Center)
                 3 -> Text(text = "Profil :", modifier.fillMaxSize(), textAlign = TextAlign.Center)
             }
