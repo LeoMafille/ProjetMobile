@@ -10,16 +10,17 @@ import com.example.application.MyApplication
 import com.example.application.types.Eleve
 import org.json.JSONArray
 import org.json.JSONObject
+import java.net.URL
 import java.util.concurrent.TimeUnit
 
 
-class ApiCli constructor(context: Context?) {
-    private var queue:RequestQueue? = null
+class ApiCli constructor(context: Context) {
+    public val queue: RequestQueue? = null
     private var contexte:Context? = null
 
     companion object{
         private var instance: ApiCli? = null
-        private val URL = "https://dev-restandroid.users.info.unicaen.fr/REST"
+        private const val URL = "https://dev-restandroid.users.info.unicaen.fr/REST"
 
         fun getInstance(contexte: Context): ApiCli{
             if ( instance == null ) {
@@ -29,7 +30,6 @@ class ApiCli constructor(context: Context?) {
         }
     }
     init{
-        this.queue = Volley.newRequestQueue(MyApplication.appContext)
         this.contexte = MyApplication.appContext
     }
 
@@ -43,10 +43,21 @@ class ApiCli constructor(context: Context?) {
         return fut
     }
 
+    /*
+    fun testURL() : String{
+        var url = URL("https://dev-restandroid.users.info.unicaen.fr/REST/student/")
+
+        var contenu = url.readText()
+
+        return contenu
+    }
+
+     */
+
 
     fun RecupererEleves() : ArrayList<Eleve> {
-/*
-        //TMP
+
+
         var liste : ArrayList<Eleve> = ArrayList()
 
         liste.add(Eleve(0, "Leveque", 1, "0606060606", false))
@@ -60,9 +71,11 @@ class ApiCli constructor(context: Context?) {
         liste.add(Eleve(8, "Brize", 1, "0606060606", false))
 
         return liste;
-        */
+
+         /*
+
         val requeteFuture: RequestFuture<JSONArray> = recupTout("student")
-        val reponse = requeteFuture.get(2, TimeUnit.MINUTES)
+        val reponse = requeteFuture.get(5, TimeUnit.SECONDS)
         val listeEleve: ArrayList<Eleve> = ArrayList()
 
         for (i: Int in 0 until reponse.length()) {
@@ -79,7 +92,6 @@ class ApiCli constructor(context: Context?) {
             }
         }
         return listeEleve
-
-
+        */
     }
 }
