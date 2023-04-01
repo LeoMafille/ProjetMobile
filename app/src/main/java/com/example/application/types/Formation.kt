@@ -3,11 +3,10 @@ package com.example.application.types
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName= "eleves")
-data class Eleve(
+@Entity(tableName="formations")
+data class Formation (
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val nom:String,
-    val idFormation:Int,
-    val numTelephone:String,
+    //TODO: Les autres éléments de la bdd
+
     val supprime:Boolean
 )
